@@ -1,18 +1,27 @@
 import { IsString } from 'class-validator';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Product } from '../../products/entities/product.entity';
+import {
+    Column,
+    Entity,
+    ManyToOne,
+    OneToOne,
+    PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity('categories')
 export class Category {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @ManyToOne(() => Category || null, {
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
-    })
+    @OneToOne(() => Category, (category) => category.parent, { nullable: true })
     parent: Category | null;
 
     @IsString()
     @Column({ type: 'varchar', length: 255 })
     name: string;
+
+    @ManyToOne(() => Product, (product) => product.categories, {
+        cascade: true,
+    })
+    product: Product;
 }
