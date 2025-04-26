@@ -1,5 +1,5 @@
 import { IsInt, IsNumber, IsString } from 'class-validator';
-import { Category } from 'src/resources/category/entities/category.entity';
+import { Category } from '../../category/entities/category.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('products')
@@ -7,11 +7,9 @@ export class Product {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @IsString({ each: true })
-    @Column({ type: 'simple-array' })
-    categories_id: string[];
-
-    @OneToMany(() => Category, (category) => category)
+    @OneToMany(() => Category, (category) => category.product, {
+        cascade: true,
+    })
     categories: Category[];
 
     @IsString()
