@@ -1,6 +1,7 @@
 import { IsString } from 'class-validator';
-import { Column, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
+@Entity('categories')
 export class Category {
     @PrimaryGeneratedColumn('uuid')
     id: string;
