@@ -1,16 +1,11 @@
 import { IsInt, IsNumber, IsString } from 'class-validator';
 import { Category } from '../../category/entities/category.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('products')
 export class Product {
     @PrimaryGeneratedColumn('uuid')
     id: string;
-
-    @OneToMany(() => Category, (category) => category.product, {
-        cascade: true,
-    })
-    categories: Category[];
 
     @IsString()
     @Column({ type: 'varchar', length: 255 })
@@ -27,4 +22,7 @@ export class Product {
     @IsString()
     @Column({ type: 'varchar', length: 2000 })
     photo: string;
+
+    @ManyToMany(() => Category, (category) => category.products)
+    categories: Category[];
 }
