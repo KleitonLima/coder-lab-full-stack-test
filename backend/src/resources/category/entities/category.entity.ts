@@ -3,7 +3,8 @@ import { Product } from '../../products/entities/product.entity';
 import {
     Column,
     Entity,
-    ManyToOne,
+    JoinTable,
+    ManyToMany,
     OneToOne,
     PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -20,6 +21,7 @@ export class Category {
     @Column({ type: 'varchar', length: 255 })
     name: string;
 
-    @ManyToOne(() => Product, (product) => product.categories)
-    product: Product;
+    @ManyToMany(() => Product, (product) => product.categories)
+    @JoinTable()
+    products: Product;
 }
