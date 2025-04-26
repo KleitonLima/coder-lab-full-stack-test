@@ -20,8 +20,6 @@ export class Category {
     @Column({ type: 'varchar', length: 255 })
     name: string;
 
-    @ManyToOne(() => Product, (product) => product.categories, {
-        cascade: true,
-    })
+    @ManyToOne(() => Product, (product) => product.categories)
     product: Product;
 }
