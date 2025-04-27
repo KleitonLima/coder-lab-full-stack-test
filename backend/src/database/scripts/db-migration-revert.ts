@@ -1,4 +1,4 @@
-import { AppDataSource } from 'src/config/typeorm.db';
+import { AppDataSource } from 'src/database/config/typeorm.db';
 
 async function run() {
     await AppDataSource.initialize();

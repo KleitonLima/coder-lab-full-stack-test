@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { setupDbConnection } from './config/connection.db';
+import { setupDbConnection } from './database/config/connection.db';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { ValidationPipe } from '@nestjs/common';
 import { swaggerConfig } from './config/swagger.config';
