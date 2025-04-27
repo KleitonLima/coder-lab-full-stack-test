@@ -1,5 +1,5 @@
 import { IsString } from 'class-validator';
-import { Product } from 'src/resources/products/entities/product.entity';
+import { Product } from '../../products/entities/product.entity';
 import {
     Column,
     Entity,
