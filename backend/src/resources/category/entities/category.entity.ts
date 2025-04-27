@@ -1,11 +1,11 @@
 import { IsString } from 'class-validator';
-import { Product } from '../../products/entities/product.entity';
+import { Product } from 'src/resources/products/entities/product.entity';
 import {
     Column,
     Entity,
-    JoinTable,
     ManyToMany,
-    OneToOne,
+    ManyToOne,
+    OneToMany,
     PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -14,14 +14,18 @@ export class Category {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @OneToOne(() => Category, (category) => category.parent, { nullable: true })
+    @ManyToOne(() => Category, (category) => category.children, {
+        nullable: true,
+    })
     parent: Category | null;
 
     @IsString()
     @Column({ type: 'varchar', length: 255 })
     name: string;
 
+    @OneToMany(() => Category, (category) => category.parent)
+    children: Category[];
+
     @ManyToMany(() => Product, (product) => product.categories)
-    @JoinTable()
-    products: Product;
+    products: Product[];
 }
