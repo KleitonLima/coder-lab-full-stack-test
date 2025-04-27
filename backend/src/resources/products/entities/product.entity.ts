@@ -15,7 +15,7 @@ export class Product {
     @Column({ type: 'decimal', precision: 10, scale: 2 })
     price: number;
 
-    @Column({ type: 'varchar', length: 2000 })
+    @Column({ type: 'text' })
     photo: string;
 
     @ManyToMany(() => Category, (category) => category.products)
