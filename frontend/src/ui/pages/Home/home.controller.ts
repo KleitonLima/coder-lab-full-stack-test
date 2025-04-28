@@ -1,8 +1,12 @@
-import { axiosService } from "../../../services/axios.service";
+import { api } from "../../../services/axios.service";
 import { IAddProduct } from "./home.interfaces";
 
-export class homeController {
+export const homeController = {
     addProduct(data: IAddProduct) {
-        return axiosService.post("/products", data);
-    }
-}
+        return api.post("/products", data);
+    },
+
+    getAllProducts() {
+        return api.get("/products");
+    },
+};
