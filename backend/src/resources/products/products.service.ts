@@ -29,11 +29,14 @@ export class ProductsService {
     }
 
     findAll() {
-        return this.productRepository.find({ relations: ['categories'] });
+        return this.productRepository.find();
     }
 
-    findOne(id: number) {
-        return `This action returns a #${id} product`;
+    findOne(id: string) {
+        return this.productRepository.findOne({
+            where: { id },
+            relations: ['categories'],
+        });
     }
 
     async update(id: string, updateProductDto: UpdateProductDto) {
@@ -47,7 +50,7 @@ export class ProductsService {
         });
     }
 
-    remove(id: number) {
-        return `This action removes a #${id} product`;
+    remove(id: string) {
+        return this.productRepository.delete(id);
     }
 }
