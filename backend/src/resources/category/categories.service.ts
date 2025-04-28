@@ -10,7 +10,7 @@ export class CategoryService {
         private readonly categoryRepository: Repository<Category>,
     ) {}
 
-    async findAll() {
-        return await this.categoryRepository.find();
+    findAll() {
+        return this.categoryRepository.find();
     }
 }
