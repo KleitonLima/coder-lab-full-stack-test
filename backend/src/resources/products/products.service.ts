@@ -40,14 +40,21 @@ export class ProductsService {
     }
 
     async update(id: string, updateProductDto: UpdateProductDto) {
+        const product = await this.productRepository.findOne({
+            where: { id },
+            relations: ['categories'],
+        });
+        if (!product) {
+            throw new Error('Produto não encontrado!');
+        }
+
         const categories = await this.categoryRepository.find({
             where: { id: In(updateProductDto.categories) },
         });
 
-        return this.productRepository.update(id, {
-            ...updateProductDto,
-            categories,
-        });
+        Object.assign(product, { ...updateProductDto, categories });
+
+        return this.productRepository.save(product);
     }
 
     remove(id: string) {
