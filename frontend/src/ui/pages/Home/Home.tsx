@@ -31,10 +31,6 @@ export const Home = () => {
     };
 
     useEffect(() => {
-        handleAllProducts();
-    }, []);
-
-    useEffect(() => {
         if (search === "") {
             handleAllProducts();
         }
