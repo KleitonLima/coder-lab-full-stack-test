@@ -36,8 +36,15 @@ export class ProductsService {
         return `This action returns a #${id} product`;
     }
 
-    update(id: number, updateProductDto: UpdateProductDto) {
-        return `This action updates a #${id} product`;
+    async update(id: string, updateProductDto: UpdateProductDto) {
+        const categories = await this.categoryRepository.find({
+            where: { id: In(updateProductDto.categories) },
+        });
+
+        return this.productRepository.update(id, {
+            ...updateProductDto,
+            categories,
+        });
     }
 
     remove(id: number) {
