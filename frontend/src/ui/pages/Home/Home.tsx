@@ -1,4 +1,4 @@
-import { DiamondPlus, Search } from "lucide-react";
+import { DiamondPlus, Search, X } from "lucide-react";
 import { Button } from "../../components/button";
 import {
     Card,
@@ -57,10 +57,23 @@ export const Home = () => {
                     <Input
                         type="text"
                         placeholder="Digite o nome do produto"
-                        className="w-48 border-b-2 border-t-2 border-r-2 border-l-0 rounded-l-none border-sky-700"
+                        className={clsx(
+                            "w-48 border-b-2 border-t-2 border-r-2 border-l-0 rounded-l-none border-sky-700",
+                            {
+                                "pr-8": search,
+                            }
+                        )}
                         value={search}
                         onChange={handleSearch}
                     />
+                    {search && (
+                        <button
+                            onClick={() => setSearch("")}
+                            className="absolute right-10 ml-2 text-red-500"
+                        >
+                            <X />
+                        </button>
+                    )}
                 </div>
             </header>
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 py-6 place-items-center">
