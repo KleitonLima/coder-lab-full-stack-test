@@ -28,8 +28,8 @@ export class ProductsService {
         return this.productRepository.save(newProduct);
     }
 
-    async findAll() {
-        return this.productRepository.find();
+    findAll() {
+        return this.productRepository.find({ relations: ['categories'] });
     }
 
     findOne(id: number) {
@@ -37,7 +37,6 @@ export class ProductsService {
     }
 
     update(id: number, updateProductDto: UpdateProductDto) {
-        
         return `This action updates a #${id} product`;
     }
 
