@@ -51,9 +51,14 @@ export const Home = () => {
                     <DiamondPlus /> Adicionar produto
                 </Button>
                 <div className="flex items-center">
-                    <button onClick={handleAllProducts}>
-                        <Search className="w-9 h-9 p-1 border-b-2 border-t-2 border-l-2 border-sky-700 rounded-l-md" />
-                    </button>
+                    <Button
+                        onClick={handleAllProducts}
+                        className={clsx(
+                            "border-b-2 border-t-2 border-l-2 border-sky-700 text-sky-700 bg-white rounded-l-md rounded-r-none hover:text-white"
+                        )}
+                    >
+                        <Search />
+                    </Button>
                     <Input
                         type="text"
                         placeholder="Digite o nome do produto"
