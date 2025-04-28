@@ -1,5 +1,4 @@
-import { IsInt, IsString, IsDecimal, IsArray, IsUUID } from 'class-validator';
-import { Category } from 'src/resources/category/entities/category.entity';
+import { IsInt, IsString, IsArray, IsUUID, IsNumber } from 'class-validator';
 
 export class CreateProductDto {
     @IsString()
@@ -8,7 +7,7 @@ export class CreateProductDto {
     @IsInt()
     qty: number;
 
-    @IsDecimal()
+    @IsNumber()
     price: number;
 
     @IsString()
@@ -16,5 +15,5 @@ export class CreateProductDto {
 
     @IsArray()
     @IsUUID('4', { each: true })
-    categories: Category[];
+    categories: string[];
 }
