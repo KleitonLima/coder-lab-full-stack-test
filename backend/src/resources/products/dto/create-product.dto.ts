@@ -1,4 +1,5 @@
-import { IsInt, IsString, IsDecimal } from 'class-validator';
+import { IsInt, IsString, IsDecimal, IsArray, IsUUID } from 'class-validator';
+import { Category } from 'src/resources/category/entities/category.entity';
 
 export class CreateProductDto {
     @IsString()
@@ -13,6 +14,7 @@ export class CreateProductDto {
     @IsString()
     photo: string;
 
-    @IsString({ each: true })
-    categories: string[]; // Assuming categories are passed as an array of strings (IDs or names)
+    @IsArray()
+    @IsUUID('4', { each: true })
+    categories: Category[];
 }
