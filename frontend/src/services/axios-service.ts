@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ENVCONFIG } from "./config/env.config";
+import { ENVCONFIG } from "../config/env.config";
 
 export const axiosService = axios.create({
     baseURL: ENVCONFIG.API_URL,
