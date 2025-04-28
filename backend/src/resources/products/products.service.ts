@@ -3,7 +3,7 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from './entities/product.entity';
-import { Repository, In } from 'typeorm';
+import { Repository, In, ILike } from 'typeorm';
 import { Category } from '../category/entities/category.entity';
 
 @Injectable()
@@ -28,7 +28,12 @@ export class ProductsService {
         return this.productRepository.save(newProduct);
     }
 
-    findAll() {
+    findAll(search: string) {
+        if (search) {
+            return this.productRepository.find({
+                where: { name: ILike(`%${search}%`) },
+            });
+        }
         return this.productRepository.find();
     }
 
