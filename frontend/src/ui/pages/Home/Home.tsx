@@ -37,6 +37,10 @@ export const Home = () => {
     const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         setSearch(value);
+
+        if (value.length === 0) {
+            handleAllProducts();
+        }
     };
 
     return (
