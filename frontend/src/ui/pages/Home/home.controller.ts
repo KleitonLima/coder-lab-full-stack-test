@@ -6,7 +6,7 @@ export const homeController = {
         return api.post("/products", data);
     },
 
-    getAllProducts() {
-        return api.get("/products");
+    getAllProducts(search?: string) {
+        return api.get(`/products?search=${search}`);
     },
 };
