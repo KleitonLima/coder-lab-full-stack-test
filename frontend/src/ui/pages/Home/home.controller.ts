@@ -1,4 +1,4 @@
-import { axiosService } from "../../../services/axios-service";
+import { axiosService } from "../../../services/axios.service";
 import { IAddProduct } from "./home.interfaces";
 
 export class homeController {
