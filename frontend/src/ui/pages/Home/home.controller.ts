@@ -7,6 +7,9 @@ export const homeController = {
     },
 
     getAllProducts(search?: string) {
-        return api.get(`/products?search=${search}`);
+        if (search) {
+            return api.get(`/products?search=${search}`);
+        }
+        return api.get("/products");
     },
 };
