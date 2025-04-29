@@ -96,40 +96,41 @@ export const Home = () => {
                 </div>
             </header>
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 py-6 place-items-center">
-                {products?.map((product) => (
-                    <Card
-                        key={product.id}
-                        className={clsx("w-60 h-80 shadow-lg relative", {
-                            "opacity-60": product.qty <= 0,
-                        })}
-                        onClick={() => navigate(`/product/${product.id}`)}
-                    >
-                        <button
-                            className="absolute top-3 right-3"
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                handleDeleteProduct(product.id);
-                            }}
+                {Array.isArray(products) &&
+                    products?.map((product) => (
+                        <Card
+                            key={product.id}
+                            className={clsx("w-60 h-80 shadow-lg relative", {
+                                "opacity-60": product.qty <= 0,
+                            })}
+                            onClick={() => navigate(`/product/${product.id}`)}
                         >
-                            <Trash className="cursor-pointer hover:text-red-500" />
-                        </button>
-                        <CardHeader className="flex flex-col">
-                            <img
-                                src={product.photo}
-                                alt={`Foto do produto: ${product.name}`}
-                                className="h-44 object-cover self-center mb-1"
-                            />
-                            <CardTitle>{product.name}</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <p>
-                                R$
-                                {product.price.toString().replace(".", ",")}
-                            </p>
-                            {product.qty <= 0 && <p>Produto esgotado</p>}
-                        </CardContent>
-                    </Card>
-                ))}
+                            <button
+                                className="absolute top-3 right-3"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleDeleteProduct(product.id);
+                                }}
+                            >
+                                <Trash className="cursor-pointer hover:text-red-500" />
+                            </button>
+                            <CardHeader className="flex flex-col">
+                                <img
+                                    src={product.photo}
+                                    alt={`Foto do produto: ${product.name}`}
+                                    className="h-44 object-cover self-center mb-1"
+                                />
+                                <CardTitle>{product.name}</CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <p>
+                                    R$
+                                    {product.price.toString().replace(".", ",")}
+                                </p>
+                                {product.qty <= 0 && <p>Produto esgotado</p>}
+                            </CardContent>
+                        </Card>
+                    ))}
             </div>
         </main>
     );
