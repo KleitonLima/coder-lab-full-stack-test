@@ -1,8 +1,8 @@
 import { api } from "../../../services/axios.service";
 import { IProduct } from "../../interfaces";
 
-export const createProductController = {
-    addProduct(data: IProduct) {
+export const ProductController = {
+    createProduct(data: IProduct) {
         return api.post("/products", data);
     },
     getCategories() {

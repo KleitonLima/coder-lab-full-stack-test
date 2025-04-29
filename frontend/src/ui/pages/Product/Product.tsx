@@ -11,22 +11,22 @@ import {
 } from "../../components/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { formSchema } from "./createProductForm.schema";
+import { formSchema } from "./ProductForm.schema";
 import { z } from "zod";
 import { Input } from "../../components/input";
 import { useEffect, useState } from "react";
 import { ICategory, IProduct } from "../../interfaces";
 import { Checkbox } from "../../components/checkbox";
-import { createProductController } from "./createProduct.controller";
+import { ProductController } from "./Product.controller";
 
-export const CreateProduct = () => {
+export const Product = () => {
     const navigate = useNavigate();
     const [categories, setCategories] = useState<ICategory[]>([]);
     const params = useParams();
 
     const handleGetCategories = async () => {
         try {
-            const response = await createProductController.getCategories();
+            const response = await ProductController.getCategories();
             if (response.status === 200) {
                 setCategories(response.data as ICategory[]);
             }
@@ -41,7 +41,7 @@ export const CreateProduct = () => {
 
     const handleGetProduct = async () => {
         try {
-            const response = await createProductController.getProductById(
+            const response = await ProductController.getProductById(
                 params.id as string
             );
             if (response.status === 200) {
@@ -77,7 +77,7 @@ export const CreateProduct = () => {
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            const response = await createProductController.addProduct(values);
+            const response = await ProductController.createProduct(values);
 
             if (response.status === 201) {
                 navigate("/");
