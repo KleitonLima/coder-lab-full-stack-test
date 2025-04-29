@@ -165,46 +165,49 @@ export const Product = () => {
                             </FormItem>
                         )}
                     />
-                    {categories.map((category) => (
-                        <FormField
-                            key={category.id}
-                            control={form.control}
-                            name="categories"
-                            render={({ field }) => {
-                                return (
-                                    <FormItem
-                                        key={category.id}
-                                        className="flex flex-row items-start space-x-3 space-y-0"
-                                    >
-                                        <FormControl>
-                                            <Checkbox
-                                                checked={field.value?.includes(
-                                                    category.id
-                                                )}
-                                                onCheckedChange={(checked) => {
-                                                    return checked
-                                                        ? field.onChange([
-                                                              ...field.value,
-                                                              category.id,
-                                                          ])
-                                                        : field.onChange(
-                                                              field.value?.filter(
-                                                                  (value) =>
-                                                                      value !==
-                                                                      category.id
-                                                              )
-                                                          );
-                                                }}
-                                            />
-                                        </FormControl>
-                                        <FormLabel className="text-sm font-normal">
-                                            {category.name}
-                                        </FormLabel>
-                                    </FormItem>
-                                );
-                            }}
-                        />
-                    ))}
+                    {Array.isArray(categories) &&
+                        categories?.map((category) => (
+                            <FormField
+                                key={category.id}
+                                control={form.control}
+                                name="categories"
+                                render={({ field }) => {
+                                    return (
+                                        <FormItem
+                                            key={category.id}
+                                            className="flex flex-row items-start space-x-3 space-y-0"
+                                        >
+                                            <FormControl>
+                                                <Checkbox
+                                                    checked={field.value?.includes(
+                                                        category.id
+                                                    )}
+                                                    onCheckedChange={(
+                                                        checked
+                                                    ) => {
+                                                        return checked
+                                                            ? field.onChange([
+                                                                  ...field.value,
+                                                                  category.id,
+                                                              ])
+                                                            : field.onChange(
+                                                                  field.value?.filter(
+                                                                      (value) =>
+                                                                          value !==
+                                                                          category.id
+                                                                  )
+                                                              );
+                                                    }}
+                                                />
+                                            </FormControl>
+                                            <FormLabel className="text-sm font-normal">
+                                                {category.name}
+                                            </FormLabel>
+                                        </FormItem>
+                                    );
+                                }}
+                            />
+                        ))}
                     <Button type="submit">Submit</Button>
                 </form>
             </Form>
