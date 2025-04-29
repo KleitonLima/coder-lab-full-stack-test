@@ -43,7 +43,7 @@ export const Home = () => {
 
     return (
         <main>
-            <header className="flex justify-between p-4">
+            <header className="flex justify-between p-4 flex-wrap gap-4">
                 <Button
                     className="w-50 bg-blue-700"
                     onClick={() => navigate("/create-product")}
@@ -74,7 +74,7 @@ export const Home = () => {
                     {search && (
                         <button
                             onClick={() => setSearch("")}
-                            className="absolute right-10 ml-2 text-red-500"
+                            className="relative w-0 right-10 ml-2 text-red-500"
                         >
                             <X />
                         </button>
