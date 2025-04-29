@@ -66,7 +66,9 @@ A aplicação traz o esperado no teste abordando os seguintes pontos:
     ```bash
     echo VITE_BACKEND='http://localhost:3000/api/v1 > .env
     ```
-11. Inicie o servidor frontend:
+9. Inicie o servidor frontend:
     ```bash
     npm run dev
     ```
+10. Acesse http://localhost:5173 para o front-end
+11. http://localhost:3000/api/v1/docs para documentação do back-end
