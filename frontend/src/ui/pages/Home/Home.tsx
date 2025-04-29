@@ -84,10 +84,11 @@ export const Home = () => {
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 py-6 place-items-center">
                 {products.map((product) => (
                     <Card
-                        key={product.name}
+                        key={product.id}
                         className={clsx("w-60 h-80 shadow-lg", {
                             "opacity-60": product.qty <= 0,
                         })}
+                        onClick={() => navigate(`/product/${product.id}`)}
                     >
                         <CardHeader className="flex flex-col">
                             <img
