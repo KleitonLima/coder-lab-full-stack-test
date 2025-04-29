@@ -100,9 +100,12 @@ export const Home = () => {
                     products?.map((product) => (
                         <Card
                             key={product.id}
-                            className={clsx("w-60 h-80 shadow-lg relative", {
-                                "opacity-60": product.qty <= 0,
-                            })}
+                            className={clsx(
+                                "w-60 h-80 shadow-lg relative transform transition-transform hover:scale-105 cursor-pointer",
+                                {
+                                    "opacity-60": product.qty <= 0,
+                                }
+                            )}
                             onClick={() => navigate(`/product/${product.id}`)}
                         >
                             <button
