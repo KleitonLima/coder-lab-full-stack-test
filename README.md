@@ -39,11 +39,19 @@ A aplicação traz o esperado no teste abordando os seguintes pontos:
     ```bash
     docker compose up -d
     ```
-6. Inicie o servidor backend:
+6. Execute as migrations para gerar as tabelas no banco:
+    ```bash
+    npm run migration:run
+    ```
+7. Execute a seed para popular as categorias:
+    ```bash
+    npm run seed:run
+    ```
+8. Inicie o servidor backend:
     ```bash
     npm run dev
     ```
-7. Abra outro terminal no diretório inicial e instale as dependências do front
+9. Abra outro terminal no diretório inicial e instale as dependências do front
     ```bash
     cd coder-lab-full-stack-test/frontend
     npm install
@@ -52,23 +60,22 @@ A aplicação traz o esperado no teste abordando os seguintes pontos:
    ```bash
     cd frontend
     npm install
-8.  Crie um arquivo .env no diretório frontend:
+10.  Crie um arquivo .env no diretório frontend:
    
-    Usando echo (Linux/macOS ou Windows com Git Bash/WSL):
-    ```bash
-    echo "VITE_BACKEND='http://localhost:3000/api/v1" > .env
-    ```
-    Usando PowerShell (Windows):
-    ```bash
-    "VITE_BACKEND='http://localhost:3000/api/v1" | Out-File -FilePath .env -Encoding utf8
-    ```
-    Usando CMD (Windows):
-    ```bash
-    echo VITE_BACKEND='http://localhost:3000/api/v1 > .env
-    ```
-9. Inicie o servidor frontend:
-    ```bash
-    npm run dev
-    ```
-10. Acesse http://localhost:5173 para o front-end
-11. http://localhost:3000/api/v1/docs para documentação do back-end
+     Usando echo (Linux/macOS ou Windows com Git Bash/WSL):
+     ```bash
+     echo "VITE_BACKEND='http://localhost:3000/api/v1" > .env
+     ```
+     Usando PowerShell (Windows):
+     ```bash
+     "VITE_BACKEND='http://localhost:3000/api/v1" | Out-File -FilePath .env -Encoding utf8
+     ```
+     Usando CMD (Windows):
+     ```bash
+     echo VITE_BACKEND='http://localhost:3000/api/v1 > .env
+     ```
+11. Inicie o servidor frontend:
+     ```bash
+     npm run dev
+     ```
+12. Acesse http://localhost:5173 para o front-end e http://localhost:3000/api/v1/docs para documentação do back-end
