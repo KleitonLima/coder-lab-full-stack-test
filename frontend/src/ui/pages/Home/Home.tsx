@@ -46,7 +46,7 @@ export const Home = () => {
             <header className="flex justify-between p-4">
                 <Button
                     className="w-50 bg-blue-700"
-                    onClick={() => navigate("/add-product")}
+                    onClick={() => navigate("/create-product")}
                 >
                     <DiamondPlus /> Adicionar produto
                 </Button>
