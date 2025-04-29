@@ -1,6 +1,6 @@
 import { ChevronLeft } from "lucide-react";
 import { Button } from "../../components/button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
     Form,
     FormControl,
@@ -15,13 +15,14 @@ import { formSchema } from "./createProductForm.schema";
 import { z } from "zod";
 import { Input } from "../../components/input";
 import { useEffect, useState } from "react";
-import { ICategory } from "../../interfaces";
+import { ICategory, IProduct } from "../../interfaces";
 import { Checkbox } from "../../components/checkbox";
 import { createProductController } from "./createProduct.controller";
 
 export const CreateProduct = () => {
     const navigate = useNavigate();
     const [categories, setCategories] = useState<ICategory[]>([]);
+    const params = useParams();
 
     const handleGetCategories = async () => {
         try {
@@ -37,6 +38,37 @@ export const CreateProduct = () => {
     useEffect(() => {
         handleGetCategories();
     }, []);
+
+    const handleGetProduct = async () => {
+        try {
+            const response = await createProductController.getProductById(
+                params.id as string
+            );
+            if (response.status === 200) {
+                const {
+                    name,
+                    qty,
+                    price,
+                    photo,
+                    categories: categoriesProduct,
+                } = response.data as IProduct;
+
+                form.setValue("name", name);
+                form.setValue("qty", qty);
+                form.setValue("price", price);
+                form.setValue("photo", photo);
+                form.setValue("categories", categoriesProduct);
+            }
+        } catch (error) {
+            console.error("Error fetching product:", error);
+        }
+    };
+
+    useEffect(() => {
+        if (params.id) {
+            handleGetProduct();
+        }
+    }, [params.id]);
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -57,7 +89,7 @@ export const CreateProduct = () => {
 
     return (
         <main>
-            <header>
+            <header className="p-4">
                 <Button className="bg-blue-700" onClick={() => navigate("/")}>
                     <ChevronLeft />
                 </Button>
@@ -65,7 +97,7 @@ export const CreateProduct = () => {
             <Form {...form}>
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}
-                    className="space-y-8"
+                    className="space-y-8 p-4"
                 >
                     <FormField
                         control={form.control}
