@@ -5,4 +5,7 @@ export const createProduct = {
     addProduct(data: IProduct) {
         return api.post("/products", data);
     },
+    getCategories() {
+        return api.get("/categories");
+    },
 };
