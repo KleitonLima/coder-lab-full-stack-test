@@ -11,4 +11,7 @@ export const ProductController = {
     getProductById(id: string) {
         return api.get(`/products/${id}`);
     },
+    updateProduct(id: string, data: IProduct) {
+        return api.patch(`/products/${id}`, data);
+    },
 };

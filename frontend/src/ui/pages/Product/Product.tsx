@@ -22,7 +22,7 @@ import { ProductController } from "./Product.controller";
 export const Product = () => {
     const navigate = useNavigate();
     const [categories, setCategories] = useState<ICategory[]>([]);
-    const params = useParams();
+    const { id: ProductId } = useParams();
 
     const handleGetCategories = async () => {
         try {
@@ -42,7 +42,7 @@ export const Product = () => {
     const handleGetProduct = async () => {
         try {
             const response = await ProductController.getProductById(
-                params.id as string
+                ProductId as string
             );
             if (response.status === 200) {
                 const {
@@ -65,10 +65,10 @@ export const Product = () => {
     };
 
     useEffect(() => {
-        if (params.id) {
+        if (ProductId) {
             handleGetProduct();
         }
-    }, [params.id]);
+    }, [ProductId]);
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -77,6 +77,17 @@ export const Product = () => {
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
+            if (ProductId) {
+                const response = await ProductController.updateProduct(
+                    ProductId,
+                    values
+                );
+
+                if (response.status === 200) {
+                    navigate("/");
+                }
+                return;
+            }
             const response = await ProductController.createProduct(values);
 
             if (response.status === 201) {
