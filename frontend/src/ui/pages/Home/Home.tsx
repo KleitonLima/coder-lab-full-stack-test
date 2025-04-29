@@ -1,4 +1,4 @@
-import { DiamondPlus, Search, X } from "lucide-react";
+import { DiamondPlus, Search, Trash, X } from "lucide-react";
 import { Button } from "../../components/button";
 import {
     Card,
@@ -39,6 +39,20 @@ export const Home = () => {
     const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         setSearch(value);
+    };
+
+    const handleDeleteProduct = async (id: string) => {
+        try {
+            const response = await homeController.deleteProduct(id);
+
+            if (response.status === 200) {
+                setProducts((prevProducts) =>
+                    prevProducts.filter((product) => product.id !== id)
+                );
+            }
+        } catch (error) {
+            console.error("Falha ao deletar produto:", error);
+        }
     };
 
     return (
@@ -85,11 +99,20 @@ export const Home = () => {
                 {products.map((product) => (
                     <Card
                         key={product.id}
-                        className={clsx("w-60 h-80 shadow-lg", {
+                        className={clsx("w-60 h-80 shadow-lg relative", {
                             "opacity-60": product.qty <= 0,
                         })}
                         onClick={() => navigate(`/product/${product.id}`)}
                     >
+                        <button
+                            className="absolute top-3 right-3"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                handleDeleteProduct(product.id);
+                            }}
+                        >
+                            <Trash className="cursor-pointer hover:text-red-500" />
+                        </button>
                         <CardHeader className="flex flex-col">
                             <img
                                 src={product.photo}
