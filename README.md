@@ -64,15 +64,15 @@ A aplicação traz o esperado no teste abordando os seguintes pontos:
    
      Usando echo (Linux/macOS ou Windows com Git Bash/WSL):
      ```bash
-     echo "VITE_BACKEND='http://localhost:3000/api/v1" > .env
+     echo "VITE_BACKEND=http://localhost:3000/api/v1" > .env
      ```
      Usando PowerShell (Windows):
      ```bash
-     "VITE_BACKEND='http://localhost:3000/api/v1" | Out-File -FilePath .env -Encoding utf8
+     "VITE_BACKEND=http://localhost:3000/api/v1" | Out-File -FilePath .env -Encoding utf8
      ```
      Usando CMD (Windows):
      ```bash
-     echo VITE_BACKEND='http://localhost:3000/api/v1 > .env
+     echo VITE_BACKEND=http://localhost:3000/api/v1 > .env
      ```
 11. Inicie o servidor frontend:
      ```bash
