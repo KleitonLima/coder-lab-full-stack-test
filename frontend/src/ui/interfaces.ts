@@ -1,4 +1,4 @@
-export interface IAddProduct {
+export interface IProduct {
     name: string;
     qty: number;
     price: number;

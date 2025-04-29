@@ -9,13 +9,13 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { homeController } from "./home.controller";
-import { IAddProduct } from "./home.interfaces";
 import clsx from "clsx";
 import { Input } from "../../components/input";
+import { IProduct } from "../../interfaces";
 
 export const Home = () => {
     const navigate = useNavigate();
-    const [products, setProducts] = useState<IAddProduct[]>([]);
+    const [products, setProducts] = useState<IProduct[]>([]);
     const [search, setSearch] = useState("");
 
     const handleAllProducts = async () => {
@@ -23,7 +23,7 @@ export const Home = () => {
             const response = await homeController.getAllProducts(search);
 
             if (response.status === 200) {
-                setProducts(response.data as IAddProduct[]);
+                setProducts(response.data as IProduct[]);
             }
         } catch (error) {
             console.error("Falha ao buscar produtos:", error);
