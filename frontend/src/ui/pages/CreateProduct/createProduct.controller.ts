@@ -8,4 +8,7 @@ export const createProductController = {
     getCategories() {
         return api.get("/categories");
     },
+    getProductById(id: string) {
+        return api.get(`/products/${id}`);
+    },
 };
