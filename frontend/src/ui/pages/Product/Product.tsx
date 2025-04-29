@@ -80,7 +80,7 @@ export const Product = () => {
             if (ProductId) {
                 const response = await ProductController.updateProduct(
                     ProductId,
-                    values
+                    { ...values, id: ProductId }
                 );
 
                 if (response.status === 200) {
@@ -88,7 +88,10 @@ export const Product = () => {
                 }
                 return;
             }
-            const response = await ProductController.createProduct(values);
+            const response = await ProductController.createProduct({
+                ...values,
+                id: crypto.randomUUID(), // Generate a temporary unique ID
+            });
 
             if (response.status === 201) {
                 navigate("/");
