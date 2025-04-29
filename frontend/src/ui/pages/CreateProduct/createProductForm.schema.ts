@@ -5,5 +5,9 @@ export const formSchema = z.object({
     qty: z.number().min(1).positive(),
     price: z.number().positive(),
     photo: z.string().url(),
-    categories: z.array(z.string()).nonempty(),
+    categories: z
+        .array(z.string())
+        .refine((value) => value.some((item) => item), {
+            message: "You have to select at least one item.",
+        }),
 });
